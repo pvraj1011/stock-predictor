@@ -68,6 +68,29 @@ streamlit run app.py
 
 ---
 
+### ✅ STEP 4: Set Up Auto Update with Task Scheduler (Windows Only)
+
+To automate daily data refresh and model updates:
+
+1. Create a file named `run_update.bat` in your project folder with the following content:
+
+   ```bat
+   @echo off
+   cd /d "C:\path\to\your\project"
+   python update_data.py
+   ```
+🔁 Replace `"C:\path\to\your\project"` with your actual project directory path.
+
+Then follow these steps to schedule the auto-update:
+
+- Open **Task Scheduler** on Windows and click **Create Basic Task**
+- Name it something like **"Stock Predictor Daily Update"**
+- Select **Daily**, and set your preferred time (e.g., **6:00 PM**)
+- Choose **Start a program**, then **Browse** to select your `run_update.bat` file
+- Click **Finish**
+
+---
+
 ## 🧠 Tech Stack
 
 - **Frontend**: Streamlit
@@ -82,12 +105,12 @@ streamlit run app.py
 
 ```
 ├── app.py                 # Streamlit UI app (run last)
-├── stock_down.py          # Data downloader (run first)
+├── data/stock_down.py     # Data downloader (run first)
 ├── data_prep.ipynb        # Model training notebook (run second)
 ├── update_data.py         # Daily prediction updater (optional)
 ├── models/                # Saved models per stock
-├── accuracy/              # Saved accuracy files (JSON)
 ├── stock_logos/           # Company logo images
+├── run_update.bat         # To update 'update_data.py'
 ├── requirements.txt
 └── README.md
 ```
